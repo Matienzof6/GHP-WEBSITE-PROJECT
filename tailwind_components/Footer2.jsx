@@ -1,6 +1,5 @@
-import { connect } from "react-redux"
+export default function Footer() {
 
-function Footer(){
     const footerNavs = [
         {
             href: 'javascript:void()',
@@ -28,7 +27,8 @@ function Footer(){
             name: 'Suuport'
         }
     ]
-    return(
+
+    return (
         <footer className="text-gray-500 bg-white px-4 py-5 max-w-screen-xl mx-auto md:px-8">
             <div className="max-w-lg sm:mx-auto sm:text-center">
                 <img src="https://www.floatui.com/logo.svg" className="w-32 sm:mx-auto" alt="" />
@@ -97,12 +97,3 @@ function Footer(){
         </footer>
     )
 }
-
-
-const mapStateToProps = state =>({
-
-})
-
-export default connect(mapStateToProps,{
-
-}) (Footer)
