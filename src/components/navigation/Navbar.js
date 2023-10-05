@@ -1,22 +1,32 @@
 import { connect } from "react-redux"
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
-import {AcmeLogo} from "./AcmeLogo.js";
-import React from "react";
+import {Navbar, NavbarBrand, Link, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import GLogo from 'assets/img/G-GHP.svg'
+import React, { useState }from "react";
+import { PuffLoader } from 'react-spinners'
 
 function NavigBar(){
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
+    const [loading]=useState(true)
     const menuItems = [
-      "Profile",
-      "Dashboard",
-      "Activity",
-      "Analytics",
-      "System",
-      "Deployments",
-      "My Settings",
-      "Team Settings",
-      "Help & Feedback",
-      "Log Out",
+        {
+            name: 'Servicios',
+            description: 'Measure actions your users take',
+            href: '/services',
+            
+          },
+          {
+            name: 'Quienes Somos',
+            description: 'Create your own targeted content',
+            href: '/about',
+            
+          },
+          {
+            name: 'Contacto',
+            description: 'Keep track of your growth',
+            href: '/contact',
+            
+          },
+      
     ];
     return(
         <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -26,38 +36,34 @@ function NavigBar(){
                 className="sm:hidden"
                 />
                 <NavbarBrand>
-                <AcmeLogo />
-                <p className="font-bold text-inherit">ACME</p>
+                    <NavbarItem>
+                    <Link href="/" className="font-bold text-inherit">
+                        <img src={GLogo} width={30} height={30} alt="GLogo" className="mx-2"/>   
+                        GHP Servicios Integrales
+                    </Link>
+                    </NavbarItem>
+                    
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem>
-                <Link color="foreground" href="#">
-                    Features
+            <NavbarContent className="hidden sm:flex gap-4" justify="end">
+                <NavbarItem isActive>
+                <Link color="foreground" href="/services">
+                    Servicios
                 </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                <Link href="#" aria-current="page">
-                    Customers
+                <Link href="/about" aria-current="page">
+                    Quienes Somos
                 </Link>
                 </NavbarItem>
-                <NavbarItem>
-                <Link color="foreground" href="#">
-                    Integrations
+                <NavbarItem isActive>
+                <Link color="foreground" href="/contact">
+                    Contacto
                 </Link>
                 </NavbarItem>
             </NavbarContent>
-            <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
-                <Link href="#">Login</Link>
-                </NavbarItem>
-                <NavbarItem>
-                <Button as={Link} color="primary" href="#" variant="flat">
-                    Sign Up
-                </Button>
-                </NavbarItem>
-            </NavbarContent>
+
             <NavbarMenu>
                 {menuItems.map((item, index) => (
                 <NavbarMenuItem key={`${item}-${index}`}>
@@ -66,10 +72,10 @@ function NavigBar(){
                         index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
                     }
                     className="w-full"
-                    href="#"
+                    href={item.href}
                     size="lg"
                     >
-                    {item}
+                    {item.name}
                     </Link>
                 </NavbarMenuItem>
                 ))}
